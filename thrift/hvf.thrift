@@ -37,10 +37,33 @@ enum hvf_status {
   WARNING = 5,
 }
 
+struct ServiceDesc {
+  1: required string ip_address;
+  2: optional string hostname;
+  3: required i32 port;
+  4: required string svc_name;
+}
+
 /**
  * Standard base service
  */
 service HVFService {
+
+  /**
+   * Discover the name of the registration service
+   */
+  list<string> findRegistrars(),
+
+  /**
+   * register a service w/ the registrar
+   */
+  hvf_status register_service(string registrar_ip, ServiceDesc srvc_desc),
+
+  /**
+   * de-register a service w/ the registrar
+   */
+  hvf_status deregister_service(string registrar_ip, ServiceDesc srvc_desc),
+
 
   /**
    * Returns a descriptive name of the service
