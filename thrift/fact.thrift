@@ -1,4 +1,3 @@
-
 namespace java com.hvf.alephnull.fact.thrift
 
 include "hvf.thrift"
